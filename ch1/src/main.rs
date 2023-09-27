@@ -31,6 +31,8 @@ fn penguins() {
 
         let fields: Vec<_> = rec.split(",").map(|field| field.trim()).collect();
 
+        // will not be in release builds: if cfg!(debug_assertions) { ... }
+        // create release build: cargo run --release
         if cfg!(debug_assertions) {
             println!();
             eprintln!("debug: {:?} -> {:?}", rec, fields)
@@ -57,7 +59,30 @@ fn penguins() {
     }
 }
 
+// EXAMPLE: NO DANGLING POINTERS
+// #[derive(Debug)] // original line
+#[derive(Debug, Clone, Copy)]
+enum Cereal {
+    // Barley,           commented out cuz i'm not using them
+    // Millet,
+    // Rice,
+    Rye,
+    // Spelt,
+    Wheat,
+}
+
+fn cereal() {
+    // let mut grains: Vec<Cereal> = vec![]; // original line
+    let mut grains: Vec<Cereal> = vec![Cereal::Wheat];
+    grains.push(Cereal::Rye);
+    // drop(grains); // original line
+    drop(grains.clone());
+
+    println!("{:?}", grains);
+}
+
 fn main() {
     greet_world();
     penguins();
+    cereal();
 }
