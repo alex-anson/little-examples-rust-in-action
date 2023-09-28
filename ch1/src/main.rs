@@ -1,3 +1,5 @@
+use std::thread;
+
 fn greet_world() {
     println!("HELLO WORLD 🌎");
     // `!` signals use of a macro. think of macros as fancy functions for now.
@@ -17,7 +19,7 @@ fn penguins() {
     let penguin_data = "\
         common name,length (cm)
         Little penguin,33
-        Yellow-eyed penguin  ,   65        
+        Yellow-eyed penguin  ,   65
         Fiordland penguin,60
         Invalid,data
     ";
@@ -81,8 +83,33 @@ fn cereal() {
     println!("{:?}", grains);
 }
 
+// EXAMPLE: PREVENTING RACE CONDITION
+fn race() {
+    let mut data = 100;
+
+    // let handler = thread::spawn(move || {
+    thread::spawn(move || {
+        data = 500;
+        println!("{}", data) // prints 500
+    });
+    let handler2 = thread::spawn(move || {
+        data = 1000;
+        println!("{}", data)
+    });
+
+    // handler.join().unwrap();  <- using this made the print lines switch order
+    handler2.join().unwrap(); // without this, 1000 doesn't get printed
+
+    // with the other fns commented out (for noise reduction) -> prints 500, 1000, then 100.
+    // now prints 1000, 500, 100
+    // this must be what the book means about not knowing which thread will run first
+
+    println!("{}", data) // prints 100
+}
+
 fn main() {
     greet_world();
     penguins();
     cereal();
+    race();
 }
