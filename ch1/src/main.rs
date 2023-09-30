@@ -107,9 +107,31 @@ fn race() {
     println!("{}", data) // prints 100
 }
 
+// EXAMPLE: ITERATOR INVALIDATION
+// fn letters() {
+//     let mut letters = vec!["a", "b", "c"];
+
+//     for letter in letters {
+//         println!("{}", letter);
+//         letters.push(letter.clone());
+//     }
+// }
+fn letters_mine() {
+    let letters = vec!["a", "b", "c"];
+    let mut new_letters = letters.clone();
+
+    for letter in letters {
+        println!("{}", letter);
+        new_letters.push(letter);
+    }
+
+    println!("{:?}", new_letters)
+}
+
 fn main() {
     greet_world();
     penguins();
     cereal();
     race();
+    letters_mine();
 }
