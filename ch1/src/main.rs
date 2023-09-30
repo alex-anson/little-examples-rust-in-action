@@ -1,4 +1,8 @@
-use std::thread;
+use std::{
+    rc::Rc,
+    sync::{Arc, Mutex},
+    thread,
+};
 
 fn greet_world() {
     println!("HELLO WORLD 🌎");
@@ -128,10 +132,21 @@ fn letters_mine() {
     println!("{:?}", new_letters)
 }
 
+// EXAMPLE: MULTIPLE WAYS TO STORE INTEGERS
+fn create_ints() {
+    let a = 10; // stored on the stack
+    let b = Box::new(20); // stored on the heap. (aka boxed integer)
+    let c = Rc::new(Box::new(30)); // boxed int wrapped within a reference counter
+    let d = Arc::new(Mutex::new(40)); // int wrapped in an atomic reference
+                                      // counter and protected by a mutual exclusion lock
+    println!("a: {3:?}, b: {2:?}, c: {1:?}, d: {0:?}", d, c, b, a);
+}
+
 fn main() {
     greet_world();
     penguins();
     cereal();
     race();
     letters_mine();
+    create_ints();
 }
