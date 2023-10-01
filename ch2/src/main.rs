@@ -1,5 +1,7 @@
+mod beware_floats;
 mod try_into;
 
+use crate::beware_floats::beware_floats;
 use crate::try_into::using_try_into;
 
 fn adding_ints() {
@@ -83,4 +85,6 @@ fn main() {
     number_comparison();
     println!("{:1$}", "", 200);
     using_try_into();
+    println!("{:1$}", "", 200);
+    beware_floats();
 }
