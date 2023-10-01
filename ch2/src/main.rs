@@ -50,10 +50,31 @@ fn base_notation() {
     println!("base 16: {:x} {:x} {:x}", three, thirty, three_hundred);
 }
 
+// Type casting
+fn number_comparison() {
+    let a = 10_i32;
+    let b = 100_u16;
+    // can't compare different types of numbers. must type cast
+    if a < (b as i32) {
+        println!("10 is less than 100");
+    }
+    // safest to cast the smaller type to the larger one (called "promotion")
+
+    let a = 45_i8;
+    let b = 300_i32;
+    if a < (b as i8) {
+        println!("45 is less than 300");
+    } else {
+        println!("DON'T TYPE CAST CARELESSLY: {}", b as i8)
+    }
+}
+
 fn main() {
     adding_ints();
     println!("{:1$}", "", 200); // essentially prints two (blank) lines
     numeric_types();
     println!("{:1$}", "", 200);
     base_notation();
+    println!("{:1$}", "", 200);
+    number_comparison();
 }
