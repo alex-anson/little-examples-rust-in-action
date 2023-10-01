@@ -6,7 +6,7 @@ fn adding_ints() {
     let e = add(add(a, b), add(c, d));
 
     println!("a + b + c + d = {}", e);
-    // ^ macro (!) -- returns code rather than values ...
+    // ^ formatting macro (!) -- returns code rather than values ...
     /*
     - when printing to the console, every input data type has its own way of
     being represented as a text string.
@@ -18,6 +18,42 @@ fn add(i: i32, j: i32) -> i32 {
     i + j
 }
 
+// SECTION: NUMBERS
+// CREATING AND PERFORMING OPERATIONS ON NUMERIC TYPES
+
+// Numeric literals and basic operations on numbers in Rust. Listing 2.3
+fn numeric_types() {
+    let twenty = 20;
+    let twenty_one: i32 = 21;
+    let twenty_two = 22_i32; // type suffix
+    let add = twenty + twenty_one + twenty_two;
+    println!("{} + {} + {} = {}", twenty, twenty_one, twenty_two, add);
+
+    let one_million: i64 = 1_000_000; // underscores = readability
+    println!("{}", one_million.pow(2)); // numbers have methods. i.e., not doing
+                                        // something like pow(one_million, 2)
+
+    let forty_twos = [42.0, 42f32, 42.0_f32]; // array. all elements must be of
+                                              // the same type (here, float 32)
+    println!("{:012}", forty_twos[0]); // 000000000042 (total of 12 characters)
+}
+
+// Using base 2, base 8, and base 16 numeric literals
+fn base_notation() {
+    let three = 0b11; // 0b prefix indicates binary numerals
+    let thirty = 0o36; // 0o = octal
+    let three_hundred = 0x12c; // 0x = hexidecimal
+
+    println!("base 10: {} {} {}", three, thirty, three_hundred);
+    println!("base 2: {:b} {:b} {:b}", three, thirty, three_hundred);
+    println!("base 8: {:o} {:o} {:o}", three, thirty, three_hundred);
+    println!("base 16: {:x} {:x} {:x}", three, thirty, three_hundred);
+}
+
 fn main() {
     adding_ints();
+    println!("{:1$}", "", 200); // essentially prints two (blank) lines
+    numeric_types();
+    println!("{:1$}", "", 200);
+    base_notation();
 }
