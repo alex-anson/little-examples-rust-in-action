@@ -1,3 +1,7 @@
+mod try_into;
+
+use crate::try_into::using_try_into;
+
 fn adding_ints() {
     let a = 10;
     let b: i32 = 20;
@@ -77,4 +81,6 @@ fn main() {
     base_notation();
     println!("{:1$}", "", 200);
     number_comparison();
+    println!("{:1$}", "", 200);
+    using_try_into();
 }
