@@ -1,10 +1,10 @@
 mod beware_floats;
+mod loops;
 mod try_into;
-mod while_loop;
 
 use crate::beware_floats::beware_floats;
+use crate::loops::loops;
 use crate::try_into::using_try_into;
-use crate::while_loop::while_loop;
 
 fn adding_ints() {
     let a = 10;
@@ -90,5 +90,5 @@ fn main() {
     println!("{:1$}", "", 200);
     beware_floats();
     println!("{:1$}", "", 200);
-    while_loop();
+    loops();
 }
