@@ -29,7 +29,20 @@ fn lets_use_loop() {
         }
         count += 1;
     }
-    println!("final count: {}", count)
+    println!("final count: {}", count);
+
+    // Rust is an expression-based language. this is why you can assign variables
+    // from conditional expressions -- i.e, from the nested_loops ƒn, below:
+    // `let duration = match...`
+    // or like the if/else statement in lil_ex
+    lil_ex();
+
+    // most surprisingly, `break` also returns a value. (returns the unit type,
+    // `()`, if nothing else is specified)
+    let n = loop {
+        break 123;
+    };
+    println!("{}", n);
 }
 
 fn nested_loops() {
@@ -54,4 +67,17 @@ fn nested_loops() {
             }
         }
     }
+}
+
+fn lil_ex() {
+    // i'm using a reference here because i don't need to alter `n`... i don't
+    // need write access??
+    fn is_even(n: &i32) -> bool {
+        n % 2 == 0
+    }
+
+    let num = 123456;
+    let description = if is_even(&num) { "even" } else { "odd" };
+
+    println!("{}", description);
 }
