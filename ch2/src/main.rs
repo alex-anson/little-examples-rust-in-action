@@ -1,9 +1,11 @@
 mod beware_floats;
 mod loops;
+mod matchh;
 mod try_into;
 
 use crate::beware_floats::beware_floats;
 use crate::loops::loops;
+use crate::matchh::matchh;
 use crate::try_into::using_try_into;
 
 fn adding_ints() {
@@ -91,4 +93,6 @@ fn main() {
     beware_floats();
     println!("{:1$}", "", 200);
     loops();
+    println!("{:1$}", "", 200);
+    matchh();
 }
