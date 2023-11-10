@@ -1,11 +1,13 @@
 mod beware_floats;
 mod loops;
+mod mandelbrot;
 mod matchh;
 mod references;
 mod try_into;
 
 use crate::beware_floats::beware_floats;
 use crate::loops::loops;
+use crate::mandelbrot::mandelbrot;
 use crate::matchh::matchh;
 use crate::references::references;
 use crate::try_into::using_try_into;
@@ -99,4 +101,10 @@ fn main() {
     matchh();
     println!("{:1$}", "", 200);
     references();
+    println!("{:1$}", "", 200);
+    println!("{:1$}", "", 200);
+    println!("{:1$}", "", 200);
+    println!("{:1$}", "", 200);
+    println!("{:1$}", "", 200);
+    mandelbrot();
 }
