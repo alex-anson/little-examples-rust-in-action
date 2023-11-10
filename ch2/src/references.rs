@@ -1,5 +1,7 @@
 pub fn references() {
     example_one();
+    needle_haystack();
+    needle_haystack_2();
 }
 
 fn example_one() {
@@ -19,4 +21,40 @@ fn example_one() {
 
     let b = a + *r; // dereferencing r
     println!("a + a = {}", b);
+}
+
+fn needle_haystack() {
+    let needle = 0o204; // 132
+    let haystack = [1, 1, 2, 5, 14, 42, 132, 420, 429, 1430, 4938];
+
+    for item in &haystack {
+        // ^ iterates over references to elements within haystack
+        if *item == needle {
+            // ^ the syntax `*item` returns the item's referent
+            println!("{}", item)
+        }
+    }
+}
+
+// this is the example that's currently in the book's GH repo (first example is
+// from the book itself)
+fn needle_haystack_2() {
+    let needle = 42;
+    let haystack = [1, 1, 2, 5, 14, 42, 132, 420, 429, 1430, 4938];
+
+    for reference in haystack.iter() {
+        let item = *reference;
+        if item == needle {
+            println!("{}", item);
+        }
+
+        if reference == &needle {
+            println!("{}", reference);
+        }
+
+        // (this part is mine ... :dropfox:)
+        if item == &needle * 10 {
+            println!("{}", item);
+        }
+    }
 }
